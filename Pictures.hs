@@ -57,7 +57,6 @@ instance Show Picture where
   show (Picture p) = concat . map (++"\n") $ p
 
 -- Transformations of pictures.
--- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 pic :: ([[Char]] -> [[Char]]) -> Picture -> Picture
 pic f (Picture p) = Picture $ f p
