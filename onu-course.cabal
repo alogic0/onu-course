@@ -9,10 +9,15 @@ license:             MIT
 license-file:        LICENSE
 author:              Roman Cheplyaka
 maintainer:          Roman Cheplyaka <roma@ro-che.info>
--- copyright:           
--- category:            
+copyright:           Addison Wesley; Roman Cheplyaka
+category:            Education
 build-type:          Simple
 cabal-version:       >=1.8
+extra-source-files:  README.txt
+
+Source-repository head
+  type:     git
+  location: git://github.com/feuerbach/onu-course.git
 
 library
   exposed-modules:     Pictures
