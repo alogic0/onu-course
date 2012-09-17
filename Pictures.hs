@@ -7,6 +7,7 @@ module Pictures
   , beside
   , superimpose
   , invertColour
+  , scale
   )
   where
 
@@ -146,3 +147,7 @@ invertColour = pic $ map (map invert)
 invert :: Char -> Char
 
 invert ch = if ch == ' ' then '#' else ' '
+
+scale :: Int -> Picture -> Picture
+scale n = pic $ \ls ->
+  map (>>= replicate n) ls >>= replicate n
