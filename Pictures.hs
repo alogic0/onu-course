@@ -8,6 +8,8 @@ module Pictures
   , superimpose
   , invertColour
   , scale
+  , black
+  , white
   )
   where
 
@@ -42,21 +44,9 @@ horse = Picture
 
 white :: Picture
 
-white = Picture
-        ["      ",
-         "      ",
-         "      ",
-         "      ",
-         "      ",
-         "      "]
+white = Picture [" "]
 
-black = Picture
-        ["######",
-         "######",
-         "######",
-         "######",
-         "######",
-         "######"]
+black = Picture ["#"]
 
 -- Getting a picture onto the screen.
 
