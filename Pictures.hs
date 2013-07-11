@@ -1,3 +1,6 @@
+{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
+{-# LANGUAGE DeriveGeneric #-}
+
 module Pictures
   ( Picture
   , horse
@@ -13,13 +16,12 @@ module Pictures
   )
   where
 
-import Test.SmallCheck
 import Test.SmallCheck.Series
 import Data.List
 import Control.Monad
 
 newtype Picture = Picture [[Char]]
-  deriving Eq
+  deriving (Eq)
 
 -- The example used in Craft2e: a polygon which looks like a horse. Here
 -- taken to be a 16 by 12 rectangle.
@@ -53,13 +55,27 @@ black = Picture ["#"]
 instance Show Picture where
   show (Picture p) = "\n" ++ concatMap (\x -> "|" ++ x ++ "|\n") p
 
--- SmallCheck generator
-instance Serial Picture where
+-- old SmallCheck generator
+{-
+  instance Serial Picture where
   series d = do
     size <- [0..d]
     map (fromList size) $ replicateM (size^2) [' ', '#']
 
   coseries = error "Picture.coseries"
+-}
+-- old SmallCheck generator
+
+-- new SmallCheck generator
+pictures :: Int -> [Picture]
+pictures d = do
+  size <- [0..d]
+  map (fromList size) $ replicateM (size^2) [' ', '#']
+
+instance Serial IO Picture where
+  series = generate pictures
+-- new SmallCheck generator
+
 
 fromList :: Int -> [Char] -> Picture
 fromList size cs = Picture $ unfoldr f cs
