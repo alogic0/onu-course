@@ -1,5 +1,4 @@
 {-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
-{-# LANGUAGE DeriveGeneric #-}
 
 module Pictures
   ( Picture
@@ -55,18 +54,7 @@ black = Picture ["#"]
 instance Show Picture where
   show (Picture p) = "\n" ++ concatMap (\x -> "|" ++ x ++ "|\n") p
 
--- old SmallCheck generator
-{-
-  instance Serial Picture where
-  series d = do
-    size <- [0..d]
-    map (fromList size) $ replicateM (size^2) [' ', '#']
-
-  coseries = error "Picture.coseries"
--}
--- old SmallCheck generator
-
--- new SmallCheck generator
+-- generator for new SmallCheck
 pictures :: Int -> [Picture]
 pictures d = do
   size <- [0..d]
@@ -74,7 +62,7 @@ pictures d = do
 
 instance Serial IO Picture where
   series = generate pictures
--- new SmallCheck generator
+-- end generator for new SmallCheck
 
 
 fromList :: Int -> [Char] -> Picture
